@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veex - Insumos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/forms.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/modals.css">
+    <link rel="stylesheet" href="css/components/tables.css">
+</head>
+<body id="insumos-page">
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/img/logo.png" alt="Veex Logo" class="logo">
+                <h3>VEEX</h3>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html" class="nav-item active"><span class="icon">📦</span> Insumos</a></li>
+                    <li><a href="modelos.html" class="nav-item"><span class="icon">👟</span> Modelos</a></li>
+                    <li><a href="custos-fixos.html" class="nav-item"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html" class="nav-item"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html" class="nav-item"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html" class="nav-item"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html" class="nav-item"><span class="icon">💰</span> Financeiro</a></li>
+                    <li><a href="relatorios.html" class="nav-item"><span class="icon">📄</span> Relatórios</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <h1>Insumos</h1>
+                <div class="user-info"></div>
+            </header>
+            <section class="content-area">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Lista de Insumos</h2>
+                        <button class="btn btn-primary" id="openAddInsumoModal">Adicionar Novo Insumo</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Unidade de Medida</th>
+                                <th>Custo por Unidade</th>
+                                <th class="actions-column">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="insumosList">
+                            </tbody>
+                        <tfoot>
+                            <tr>
+                                <td data-label="Total de Insumos:" colspan="2"><strong>Total de Insumos:</strong></td>
+                                <td data-label="Total de Insumos" colspan="2" id="totalInsumosCount">0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="insumoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Adicionar Novo Insumo</h2>
+                <button class="close-button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="insumoForm">
+                    <input type="hidden" id="insumoId">
+                    <div class="form-group">
+                        <label for="insumoNome">Nome do Insumo:</label>
+                        <input type="text" id="insumoNome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="unidadeMedida">Unidade de Medida:</label>
+                        <select id="unidadeMedida" required>
+                            <option value="">Selecione</option>
+                            <option value="unidade">Unidade</option>
+                            <option value="metro">Metro</option>
+                            <option value="litro">Litro</option>
+                            <option value="par">Par</option>
+                            <option value="kg">KG</option>
+                            <option value="grama">Grama</option>
+                            <option value="ml">ML</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="custoUnidade">Custo por Unidade (R$):</label>
+                        <input type="number" id="custoUnidade" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-secondary close-button">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/insumos.js"></script>
+</body>
+</html>
