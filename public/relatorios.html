@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veex - Relatórios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/charts.css">
+</head>
+<body id="relatorios-page">
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/img/logo.png" alt="Veex Logo" class="logo">
+                <h3>VEEX</h3>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html" class="nav-item"><span class="icon">📦</span> Insumos</a></li>
+                    <li><a href="modelos.html" class="nav-item"><span class="icon">👟</span> Modelos</a></li>
+                    <li><a href="custos-fixos.html" class="nav-item"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html" class="nav-item"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html" class="nav-item"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html" class="nav-item"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html" class="nav-item"><span class="icon">💰</span> Financeiro</a></li>
+                    <li><a href="relatorios.html" class="nav-item active"><span class="icon">📄</span> Relatórios</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <h1>Relatórios e Backup</h1>
+                <div class="user-info"></div>
+            </header>
+            <section class="content-area">
+                <div class="card">
+                    <h2>Relatórios Gráficos</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg);">
+                        <div class="card chart-card">
+                            <h3>Custo por Modelo</h3>
+                            <canvas id="custoPorModeloChart"></canvas>
+                        </div>
+                        <div class="card chart-card">
+                            <h3>Consumo Total de Insumos</h3>
+                            <canvas id="consumoInsumosChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: var(--spacing-lg);">
+                    <h2>Backup e Restauração de Dados</h2>
+                    <div class="form-group">
+                        <p>Faça backup de todos os seus dados em um arquivo JSON para segurança.</p>
+                        <button class="btn btn-primary" id="exportDataBtn">Exportar Dados (JSON)</button>
+                    </div>
+                    <div class="form-group" style="margin-top: var(--spacing-lg);">
+                        <p>Restaure seus dados de um arquivo JSON de backup.</p>
+                        <input type="file" id="importDataInput" accept=".json">
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">
+                            * Ao importar, os dados atuais serão substituídos pelos dados do arquivo JSON.
+                            A página será recarregada após a importação.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/calculadora.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
