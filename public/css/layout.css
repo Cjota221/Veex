@@ -1,0 +1,256 @@
+body {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--text-light);
+    display: flex;
+    justify-content: center; /* Centraliza o app-container */
+    align-items: flex-start;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--gradient-start-color) 0%, var(--gradient-end-color) 100%); /* Degradê linear */
+    background-attachment: fixed;
+    overflow-y: auto;
+}
+
+.app-container {
+    display: flex;
+    width: 100%;
+    max-width: 1500px; /* Largura máxima para desktop para evitar esticar demais */
+    min-height: 100vh;
+    background-color: transparent; /* Permite que o degradê do body seja visto */
+    box-shadow: none;
+    border-radius: var(--border-radius-xxl); /* Arredonda o container principal */
+    overflow: hidden; /* Garante que os cantos arredondados sejam cortados */
+}
+
+.sidebar {
+    width: 280px;
+    background-color: var(--surface-dark);
+    padding: var(--spacing-xl); /* Mais padding geral */
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    transition: transform var(--transition-speed) var(--transition-timing);
+    transform: translateX(0);
+    z-index: 1000;
+    border-right: 1px solid var(--border-color);
+    border-radius: var(--border-radius-xxl) 0 0 var(--border-radius-xxl); /* Arredondamento apenas na esquerda */
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+    position: absolute;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-header .logo {
+    width: 90px; /* Um pouco maior para destaque */
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: var(--spacing-sm);
+    filter: drop-shadow(0 0 8px var(--primary-color)); /* Brilho mais intenso */
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    color: var(--text-light);
+    font-size: var(--font-size-xxl); /* Título maior e mais impactante */
+    font-weight: 800; /* Mais peso */
+    letter-spacing: 1.5px; /* Mais espaçamento para "Veex" */
+    text-transform: uppercase; /* Como na referência */
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-nav li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.main-nav a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: var(--border-radius-md);
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                color var(--transition-speed) var(--transition-timing),
+                transform 0.1s ease-out;
+    font-weight: 500;
+    font-size: var(--font-size-base);
+}
+
+.main-nav a .icon { /* Estilo para o span do ícone */
+    font-size: var(--font-size-large);
+    line-height: 1; /* Garante que o ícone não adicione espaçamento extra */
+}
+
+.main-nav a:hover {
+    background-color: var(--surface-light);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.main-nav a.active {
+    background-color: var(--primary-color);
+    color: var(--surface-dark);
+    box-shadow: var(--shadow-light);
+    font-weight: 600;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 0 var(--border-radius-xxl) var(--border-radius-xxl) 0; /* Arredondamento apenas na direita */
+}
+
+.header {
+    background-color: var(--surface-dark);
+    padding: var(--spacing-lg) var(--spacing-xxl); /* Mais padding no header */
+    box-shadow: var(--shadow-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 var(--border-radius-xxl) 0 0; /* Arredondamento superior direito */
+}
+
+.header h1 {
+    margin: 0;
+    color: var(--text-light);
+    font-size: var(--font-size-xxl); /* Título principal maior */
+    font-weight: 800; /* Mais peso */
+    letter-spacing: 0.5px;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: var(--font-size-xxxl); /* Ícone maior para mobile */
+    cursor: pointer;
+    display: none;
+    padding: var(--spacing-xs);
+    border-radius: var(--border-radius-sm);
+    transition: background-color var(--transition-speed) var(--transition-timing);
+}
+
+.menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.content-area {
+    padding: var(--spacing-xxl); /* Padding substancial para o conteúdo */
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Responsividade */
+@media (max-width: 992px) { /* Tablet breakpoint */
+    .app-container {
+        flex-direction: column;
+        max-width: 95%; /* Ocupa mais espaço em tablets */
+        border-radius: var(--border-radius-xl); /* Arredonda o container inteiro */
+        overflow: hidden;
+    }
+
+    .sidebar {
+        position: fixed;
+        width: 280px; /* Mantém a largura */
+        height: 100%;
+        transform: translateX(-100%);
+        box-shadow: var(--shadow-heavy);
+        border-radius: 0 var(--border-radius-xl) var(--border-radius-xl) 0;
+        border-right: none;
+        top: 0;
+        left: 0;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        border-radius: var(--border-radius-xl);
+    }
+
+    .header {
+        padding-left: var(--spacing-lg);
+        justify-content: flex-start;
+        gap: var(--spacing-md);
+        border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+    }
+
+    .header h1 {
+        font-size: var(--font-size-xl); /* Ajuste para tablets */
+    }
+
+    .content-area {
+        padding: var(--spacing-xl); /* Menos padding em tablets */
+    }
+}
+
+@media (max-width: 768px) { /* Mobile breakpoint */
+    .app-container {
+        max-width: 100%;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    .sidebar {
+        width: 85%; /* Um pouco mais largo em mobile */
+        max-width: 320px;
+    }
+
+    .header {
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .header h1 {
+        font-size: var(--font-size-large);
+        line-height: 1.2;
+    }
+
+    .content-area {
+        padding: var(--spacing-lg); /* Padding para mobile */
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .card {
+        padding: var(--spacing-lg);
+    }
+}
