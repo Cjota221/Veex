@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veex - Produção</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/forms.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/modals.css">
+    <link rel="stylesheet" href="css/components/tables.css">
+    <style>
+        .modelo-producao-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--surface-light);
+            padding: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            font-size: var(--font-size-small);
+        }
+
+        .modelo-producao-item span {
+            flex-grow: 1;
+            color: var(--text-light);
+        }
+
+        .modelo-producao-item .btn-sm {
+            padding: 4px 8px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body id="producao-page">
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/img/logo.png" alt="Veex Logo" class="logo">
+                <h3>VEEX</h3>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html" class="nav-item"><span class="icon">📦</span> Insumos</a></li>
+                    <li><a href="modelos.html" class="nav-item"><span class="icon">👟</span> Modelos</a></li>
+                    <li><a href="custos-fixos.html" class="nav-item"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html" class="nav-item"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html" class="nav-item active"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html" class="nav-item"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html" class="nav-item"><span class="icon">💰</span> Financeiro</a></li>
+                    <li><a href="relatorios.html" class="nav-item"><span class="icon">📄</span> Relatórios</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <h1>Produção</h1>
+                <div class="user-info"></div>
+            </header>
+            <section class="content-area">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Registro de Produções</h2>
+                        <button class="btn btn-primary" id="openAddProducaoModal">Registrar Nova Produção</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Nome da Produção</th>
+                                <th>Total de Pares</th>
+                                <th>Custo Total</th>
+                                <th>Lucro Total Estimado</th>
+                                <th class="actions-column">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="producoesList">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="producaoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Registrar Nova Produção</h2>
+                <button class="close-button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="producaoForm">
+                    <input type="hidden" id="producaoId">
+
+                    <div class="form-group">
+                        <label for="nomeProducao">Nome/Descrição da Produção:</label>
+                        <input type="text" id="nomeProducao" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataProducao">Data da Produção:</label>
+                        <input type="date" id="dataProducao" required>
+                    </div>
+
+                    <h3>Modelos Produzidos</h3>
+                    <div class="form-group">
+                        <label for="modeloProducaoSelect">Modelo:</label>
+                        <select id="modeloProducaoSelect">
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidadeProducaoModelo">Quantidade de Pares:</label>
+                        <input type="number" id="quantidadeProducaoModelo" step="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="margemLucroProducaoModelo">Margem de Lucro para Venda (%):</label>
+                        <input type="number" id="margemLucroProducaoModelo" step="0.1" min="0" max="100">
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="addModeloToProducao">Adicionar Modelo à Produção</button>
+                    <ul id="producaoModelosComposicao" style="margin-top: var(--spacing-md); padding: 0; list-style: none;">
+                        </ul>
+
+                    <div class="card summary-card" style="text-align: left; margin-top: var(--spacing-lg); padding: var(--spacing-lg);">
+                        <h4>Resumo da Produção</h4>
+                        <p><strong>Custo Total da Produção:</strong> <span id="custoTotalProducao">R$ 0,00</span></p>
+                        <p><strong>Lucro Total Estimado:</strong> <span id="lucroTotalProducao">R$ 0,00</span></p>
+                        <p><strong>Total de Pares Produzidos:</strong> <span id="totalParesProduzidos">0 Pares</span></p>
+                        <p><strong>Preço Mínimo de Venda (por par):</strong> <span id="precoMinimoVenda">R$ 0,00</span></p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Salvar Produção</button>
+                        <button type="button" class="btn btn-secondary close-button">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/calculadora.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/producao.js"></script>
+</body>
+</html>
