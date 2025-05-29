@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veex - Financeiro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/tables.css">
+</head>
+<body id="financeiro-page">
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/img/logo.png" alt="Veex Logo" class="logo">
+                <h3>VEEX</h3>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html" class="nav-item"><span class="icon">📦</span> Insumos</a></li>
+                    <li><a href="modelos.html" class="nav-item"><span class="icon">👟</span> Modelos</a></li>
+                    <li><a href="custos-fixos.html" class="nav-item"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html" class="nav-item"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html" class="nav-item"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html" class="nav-item"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html" class="nav-item active"><span class="icon">💰</span> Financeiro</a></li>
+                    <li><a href="relatorios.html" class="nav-item"><span class="icon">📄</span> Relatórios</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <h1>Resumo Financeiro</h1>
+                <div class="user-info"></div>
+            </header>
+            <section class="content-area">
+                <div class="dashboard-grid">
+                    <div class="card summary-card">
+                        <h3>Custo Total Gerado (Produções)</h3>
+                        <p id="totalCustoGeral">R$ 0,00</p>
+                    </div>
+                    <div class="card summary-card">
+                        <h3>Lucro Total Estimado (Produções)</h3>
+                        <p id="totalLucroGeral" style="color: var(--success-color);">R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Projeções e Detalhes Financeiros (Futuro)</h2>
+                    <p>Esta seção pode ser expandida para incluir:</p>
+                    <ul>
+                        <li>Gráficos de lucro ao longo do tempo.</li>
+                        <li>Análise de despesas (fixas vs. variáveis).</li>
+                        <li>Projeções financeiras baseadas em metas de produção.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/calculadora.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/financeiro.js"></script>
+</body>
+</html>
