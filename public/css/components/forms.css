@@ -1,0 +1,73 @@
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: var(--font-size-small);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+    margin-top: var(--spacing-xxl);
+}
+
+/* Upload de imagem */
+.image-upload-preview {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+    background-color: var(--surface-light);
+    cursor: pointer;
+    transition: border-color var(--transition-speed) var(--transition-timing),
+                background-color var(--transition-speed) var(--transition-timing);
+    position: relative;
+}
+
+.image-upload-preview:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(var(--primary-color), 0.1);
+}
+
+.image-upload-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-upload-preview span {
+    color: var(--text-muted);
+    font-size: var(--font-size-small);
+    text-align: center;
+    padding: var(--spacing-sm);
+    position: absolute;
+    z-index: 1;
+}
+
+/* Ícone de câmera */
+.image-upload-preview::before {
+    content: '📸';
+    font-size: 3.5rem;
+    color: var(--text-muted);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.image-upload-preview img + span,
+.image-upload-preview img + .image-upload-preview::before {
+    display: none;
+}
