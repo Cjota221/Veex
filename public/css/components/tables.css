@@ -1,0 +1,151 @@
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 var(--spacing-sm); /* Espaçamento entre linhas da tabela */
+    margin-top: var(--spacing-lg);
+    overflow-x: auto; /* Permite rolagem horizontal em telas menores */
+    display: block; /* Essencial para overflow-x e para cada linha virar um bloco em mobile */
+    white-space: nowrap; /* Impede que o texto quebre linhas dentro das células */
+    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em dispositivos iOS */
+}
+
+/* Torna o cabeçalho e corpo da tabela flexíveis dentro do container de rolagem */
+.data-table thead, .data-table tbody {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* Colunas de largura igual */
+}
+
+
+.data-table th,
+.data-table td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    text-align: left;
+    background-color: var(--surface-dark); /* Fundo padrão da célula */
+    color: var(--text-light);
+    vertical-align: middle;
+}
+
+.data-table th {
+    background-color: var(--surface-light); /* Fundo mais claro para o cabeçalho */
+    color: var(--text-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: var(--font-size-small);
+    position: sticky; /* Cabeçalho fixo ao rolar */
+    top: 0;
+    z-index: 1;
+    border-bottom: 1px solid var(--border-color); /* Separador sutil */
+}
+
+.data-table tbody tr {
+    background-color: var(--surface-dark);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-light); /* Sombra sutil para cada linha */
+    transition: transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing),
+                background-color var(--transition-speed) var(--transition-timing);
+}
+
+.data-table tbody tr:hover {
+    transform: translateY(-3px); /* Efeito de elevação no hover */
+    box-shadow: var(--shadow-medium);
+    background-color: var(--surface-light); /* Fundo ligeiramente mais claro no hover */
+}
+
+/* Estilo para linhas pares para melhor legibilidade */
+.data-table tbody tr:nth-child(even) {
+    background-color: #262645; /* Um tom ligeiramente diferente */
+}
+.data-table tbody tr:nth-child(even):hover {
+     background-color: var(--surface-light); /* Mantém o hover uniforme */
+}
+
+
+.data-table .actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+/* Arredondamento dos cantos das primeiras e últimas células */
+.data-table thead tr th:first-child {
+    border-top-left-radius: var(--border-radius-md);
+    border-bottom-left-radius: var(--border-radius-md);
+}
+.data-table thead tr th:last-child {
+    border-top-right-radius: var(--border-radius-md);
+    border-bottom-right-radius: var(--border-radius-md);
+}
+
+.data-table tbody tr td:first-child { border-top-left-radius: var(--border-radius-md); border-bottom-left-radius: var(--border-radius-md); }
+.data-table tbody tr td:last-child { border-top-right-radius: var(--border-radius-md); border-bottom-right-radius: var(--border-radius-md); }
+
+/* Estilo para o rodapé da tabela */
+.data-table tfoot td {
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    font-weight: 700;
+    color: var(--primary-color);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--surface-dark);
+    border-radius: var(--border-radius-md);
+}
+
+/* Responsividade para tabelas em Mobile (menor que 768px) */
+@media (max-width: 768px) {
+    .data-table {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%; /* Ocupa a largura total */
+        border-spacing: 0; /* Remove espaçamento entre linhas em mobile */
+    }
+
+    .data-table thead {
+        display: none; /* Esconde o cabeçalho da tabela em mobile */
+    }
+
+    .data-table tbody, .data-table tr, .data-table td {
+        display: block; /* Cada linha e célula se torna um bloco */
+        width: 100%; /* Ocupa a largura total */
+        white-space: normal; /* Permite quebra de linha normal */
+    }
+
+    .data-table tbody tr {
+        margin-bottom: var(--spacing-md);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-light);
+        border-radius: var(--border-radius-lg); /* Bordas mais arredondadas para as "linhas-cards" */
+        overflow: hidden; /* Garante que o conteúdo não vaze */
+    }
+
+    .data-table tbody td {
+        text-align: right; /* Alinha o valor à direita */
+        padding-left: 50%; /* Cria espaço para a label */
+        position: relative;
+        border-bottom: 1px dotted var(--border-color); /* Separador sutil entre células */
+        background-color: var(--surface-dark); /* Garante fundo da célula */
+    }
+
+    .data-table tbody td:last-child {
+        border-bottom: none; /* Remove borda da última célula */
+    }
+
+    .data-table tbody td::before { /* Pseudo-elemento para exibir o cabeçalho (data-label) */
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: var(--spacing-md);
+        font-weight: 600;
+        color: var(--text-muted);
+        text-align: left;
+    }
+
+    .data-table .actions {
+        justify-content: flex-end;
+        padding-top: var(--spacing-md);
+        border-top: 1px solid var(--border-color); /* Linha divisória antes das ações */
+    }
+}
