@@ -1,0 +1,52 @@
+:root {
+    /* Cores do Tema Veex - Inspiradas na referência */
+    --gradient-start-color: #1e1f2f; /* Azul escuro profundo (fundo) */
+    --gradient-end-color: #0d0d1a;   /* Quase preto, para o degradê */
+
+    --primary-color: #dc2eda; /* Pink Vibrante (destaque principal) */
+    --secondary-color: #f2ea21; /* Amarelo Vibrante (destaque secundário) */
+
+    --surface-dark: #2a2c42; /* Fundo dos cards e elementos escuros */
+    --surface-light: #3a3d5f; /* Fundo de elementos interativos, hover, inputs */
+    --text-light: #E0E0E0;   /* Cor do texto principal claro */
+    --text-muted: #A0A0B0;   /* Cor do texto secundário/subtle */
+    --border-color: rgba(255, 255, 255, 0.08); /* Bordas muito sutis */
+
+    /* Cores de status */
+    --success-color: #4CAF50;
+    --danger-color: #F44336;
+    --info-color: #2196F3;
+
+    /* Fontes */
+    --font-family-primary: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-size-base: 1rem;
+    --font-size-small: 0.875rem;
+    --font-size-large: 1.15rem; /* Ajustado para melhor proporção no desktop */
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+    --font-size-xxxl: 2.5rem; /* Para títulos maiores no desktop */
+
+    /* Espaçamento */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* Borda arredondada */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-xl: 16px; /* Para cards e elementos maiores */
+    --border-radius-xxl: 24px; /* Para um estilo mais suave em containers */
+
+    /* Sombras (sutis e modernas, com leve "brilho" da cor primária) */
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(220, 46, 218, 0.05);
+    --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(220, 46, 218, 0.1);
+    --shadow-heavy: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(220, 46, 218, 0.15);
+
+    /* Transições */
+    --transition-speed: 0.3s;
+    --transition-timing: ease-in-out;
+}
