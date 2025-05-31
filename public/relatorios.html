@@ -4,81 +4,251 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veex - Relatórios</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components/cards.css">
     <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/tables.css">
+    <link rel="stylesheet" href="css/components/forms.css">
+    <link rel="stylesheet" href="css/components/modals.css">
     <link rel="stylesheet" href="css/components/charts.css">
 </head>
-<body id="relatorios-page">
+<body>
     <div class="app-container">
+        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="assets/img/logo.png" alt="Veex Logo" class="logo">
-                <h3>VEEX</h3>
+            <div class="logo">
+                <h1>VEEX</h1>
             </div>
-            <nav class="main-nav">
+            <nav class="menu">
                 <ul>
-                    <li><a href="index.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a></li>
-                    <li><a href="insumos.html" class="nav-item"><span class="icon">📦</span> Insumos</a></li>
-                    <li><a href="modelos.html" class="nav-item"><span class="icon">👟</span> Modelos</a></li>
-                    <li><a href="custos-fixos.html" class="nav-item"><span class="icon">⚙️</span> Custos Fixos</a></li>
-                    <li><a href="custos-variaveis.html" class="nav-item"><span class="icon">📊</span> Custos Variáveis</a></li>
-                    <li><a href="producao.html" class="nav-item"><span class="icon">🏭</span> Produção</a></li>
-                    <li><a href="estoque.html" class="nav-item"><span class="icon">📦</span> Estoque</a></li>
-                    <li><a href="financeiro.html" class="nav-item"><span class="icon">💰</span> Financeiro</a></li>
-                    <li><a href="relatorios.html" class="nav-item active"><span class="icon">📄</span> Relatórios</a></li>
+                    <li><a href="index.html"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html"><span class="icon">📦</span> Insumos</a></li>
+                    <li><a href="modelos.html"><span class="icon">👟</span> Modelos</a></li>
+                    <li><a href="custos-fixos.html"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html"><span class="icon">💰</span> Financeiro</a></li>
+                    <li class="active"><a href="relatorios.html"><span class="icon">📄</span> Relatórios</a></li>
                 </ul>
             </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <span>👤</span>
+                </div>
+            </div>
         </aside>
+
+        <!-- Main Content -->
         <main class="main-content">
-            <header class="header">
-                <button class="menu-toggle" id="menuToggle">☰</button>
+            <header class="page-header">
                 <h1>Relatórios e Backup</h1>
-                <div class="user-info"></div>
+                <div class="header-actions">
+                    <button class="btn btn-icon" id="toggleSidebar">☰</button>
+                </div>
             </header>
-            <section class="content-area">
-                <div class="card">
-                    <h2>Relatórios Gráficos</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg);">
-                        <div class="card chart-card">
-                            <h3>Custo por Modelo</h3>
-                            <canvas id="custoPorModeloChart"></canvas>
-                        </div>
-                        <div class="card chart-card">
-                            <h3>Consumo Total de Insumos</h3>
-                            <canvas id="consumoInsumosChart"></canvas>
+
+            <!-- Relatórios Gráficos -->
+            <section class="card-grid">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h2>Relatórios Gráficos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="reports-grid">
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Custo por Modelo</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="chart-container" id="custoModeloChart">
+                                        <!-- Chart will be rendered here by JS -->
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportCustoModeloBtn">Exportar</button>
+                                    <button class="btn btn-text btn-sm" id="printCustoModeloBtn">Imprimir</button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Consumo Total de Insumos</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="chart-container" id="consumoInsumosChart">
+                                        <!-- Chart will be rendered here by JS -->
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportConsumoInsumosBtn">Exportar</button>
+                                    <button class="btn btn-text btn-sm" id="printConsumoInsumosBtn">Imprimir</button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Produção Mensal</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="chart-container" id="producaoMensalChart">
+                                        <!-- Chart will be rendered here by JS -->
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportProducaoMensalBtn">Exportar</button>
+                                    <button class="btn btn-text btn-sm" id="printProducaoMensalBtn">Imprimir</button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Análise Financeira</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="chart-container" id="analiseFinanceiraChart">
+                                        <!-- Chart will be rendered here by JS -->
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportAnaliseFinanceiraBtn">Exportar</button>
+                                    <button class="btn btn-text btn-sm" id="printAnaliseFinanceiraBtn">Imprimir</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="card" style="margin-top: var(--spacing-lg);">
-                    <h2>Backup e Restauração de Dados</h2>
-                    <div class="form-group">
-                        <p>Faça backup de todos os seus dados em um arquivo JSON para segurança.</p>
-                        <button class="btn btn-primary" id="exportDataBtn">Exportar Dados (JSON)</button>
+            <!-- Relatórios Tabulares -->
+            <section class="card-grid">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h2>Relatórios Tabulares</h2>
                     </div>
-                    <div class="form-group" style="margin-top: var(--spacing-lg);">
-                        <p>Restaure seus dados de um arquivo JSON de backup.</p>
-                        <input type="file" id="importDataInput" accept=".json">
-                        <p style="font-size: 0.85rem; color: var(--text-muted);">
-                            * Ao importar, os dados atuais serão substituídos pelos dados do arquivo JSON.
-                            A página será recarregada após a importação.
-                        </p>
+                    <div class="card-content">
+                        <div class="reports-grid">
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Resumo de Produção</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="form-inline mb-3">
+                                        <select id="periodoProducao" class="form-control form-control-sm">
+                                            <option value="mes">Último Mês</option>
+                                            <option value="trimestre">Último Trimestre</option>
+                                            <option value="semestre">Último Semestre</option>
+                                            <option value="ano">Último Ano</option>
+                                        </select>
+                                        <button class="btn btn-secondary btn-sm ml-2" id="gerarRelatorioProducaoBtn">Gerar</button>
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportProducaoBtn">Exportar CSV</button>
+                                    <button class="btn btn-text btn-sm" id="printProducaoBtn">Imprimir</button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Inventário de Estoque</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="form-inline mb-3">
+                                        <select id="tipoInventario" class="form-control form-control-sm">
+                                            <option value="produtos">Produtos</option>
+                                            <option value="insumos">Insumos</option>
+                                            <option value="todos">Todos</option>
+                                        </select>
+                                        <button class="btn btn-secondary btn-sm ml-2" id="gerarInventarioBtn">Gerar</button>
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportInventarioBtn">Exportar CSV</button>
+                                    <button class="btn btn-text btn-sm" id="printInventarioBtn">Imprimir</button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Análise de Custos</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="form-inline mb-3">
+                                        <select id="tipoCustos" class="form-control form-control-sm">
+                                            <option value="fixos">Custos Fixos</option>
+                                            <option value="variaveis">Custos Variáveis</option>
+                                            <option value="todos">Todos os Custos</option>
+                                        </select>
+                                        <button class="btn btn-secondary btn-sm ml-2" id="gerarCustosBtn">Gerar</button>
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportCustosBtn">Exportar CSV</button>
+                                    <button class="btn btn-text btn-sm" id="printCustosBtn">Imprimir</button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="report-header">
+                                    <h3>Demonstrativo Financeiro</h3>
+                                </div>
+                                <div class="report-content">
+                                    <div class="form-inline mb-3">
+                                        <select id="periodoFinanceiro" class="form-control form-control-sm">
+                                            <option value="mes">Último Mês</option>
+                                            <option value="trimestre">Último Trimestre</option>
+                                            <option value="semestre">Último Semestre</option>
+                                            <option value="ano">Último Ano</option>
+                                        </select>
+                                        <button class="btn btn-secondary btn-sm ml-2" id="gerarFinanceiroBtn">Gerar</button>
+                                    </div>
+                                </div>
+                                <div class="report-footer">
+                                    <button class="btn btn-secondary btn-sm" id="exportFinanceiroBtn">Exportar CSV</button>
+                                    <button class="btn btn-text btn-sm" id="printFinanceiroBtn">Imprimir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Backup e Restauração -->
+            <section class="card-grid">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h2>Backup e Restauração de Dados</h2>
+                    </div>
+                    <div class="card-content">
+                        <p class="mb-4">Faça backup de todos os seus dados em um arquivo JSON para segurança.</p>
+                        
+                        <div class="backup-actions">
+                            <div class="backup-section">
+                                <h3>Backup de Dados</h3>
+                                <p>Exporte todos os dados do sistema para um arquivo JSON.</p>
+                                <button class="btn btn-primary" id="backupBtn">Fazer Backup</button>
+                            </div>
+                            
+                            <div class="backup-section">
+                                <h3>Restauração de Dados</h3>
+                                <p>Importe dados de um arquivo JSON de backup anterior.</p>
+                                <div class="form-group">
+                                    <input type="file" id="restauracaoFile" class="form-control-file" accept=".json">
+                                </div>
+                                <button class="btn btn-secondary" id="restaurarBtn">Restaurar Dados</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <script src="js/storage.js"></script>
-    <script src="js/calculadora.js"></script>
     <script src="js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/relatorios.js"></script>
 </body>
 </html>
