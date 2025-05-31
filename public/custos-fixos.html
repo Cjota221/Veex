@@ -4,103 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veex - Custos Fixos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components/cards.css">
-    <link rel="stylesheet" href="css/components/forms.css">
     <link rel="stylesheet" href="css/components/buttons.css">
-    <link rel="stylesheet" href="css/components/modals.css">
     <link rel="stylesheet" href="css/components/tables.css">
+    <link rel="stylesheet" href="css/components/forms.css">
+    <link rel="stylesheet" href="css/components/modals.css">
 </head>
-<body id="custos-fixos-page">
+<body>
     <div class="app-container">
+        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="assets/img/logo.png" alt="Veex Logo" class="logo">
-                <h3>VEEX</h3>
+            <div class="logo">
+                <h1>VEEX</h1>
             </div>
-            <nav class="main-nav">
+            <nav class="menu">
                 <ul>
-                    <li><a href="index.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a></li>
-                    <li><a href="insumos.html" class="nav-item"><span class="icon">📦</span> Insumos</a></li>
-                    <li><a href="modelos.html" class="nav-item"><span class="icon">👟</span> Modelos</a></li>
-                    <li><a href="custos-fixos.html" class="nav-item active"><span class="icon">⚙️</span> Custos Fixos</a></li>
-                    <li><a href="custos-variaveis.html" class="nav-item"><span class="icon">📊</span> Custos Variáveis</a></li>
-                    <li><a href="producao.html" class="nav-item"><span class="icon">🏭</span> Produção</a></li>
-                    <li><a href="estoque.html" class="nav-item"><span class="icon">📦</span> Estoque</a></li>
-                    <li><a href="financeiro.html" class="nav-item"><span class="icon">💰</span> Financeiro</a></li>
-                    <li><a href="relatorios.html" class="nav-item"><span class="icon">📄</span> Relatórios</a></li>
+                    <li><a href="index.html"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html"><span class="icon">📦</span> Insumos</a></li>
+                    <li><a href="modelos.html"><span class="icon">👟</span> Modelos</a></li>
+                    <li class="active"><a href="custos-fixos.html"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html"><span class="icon">💰</span> Financeiro</a></li>
+                    <li><a href="relatorios.html"><span class="icon">📄</span> Relatórios</a></li>
                 </ul>
             </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <span>👤</span>
+                </div>
+            </div>
         </aside>
+
+        <!-- Main Content -->
         <main class="main-content">
-            <header class="header">
-                <button class="menu-toggle" id="menuToggle">☰</button>
+            <header class="page-header">
                 <h1>Custos Fixos</h1>
-                <div class="user-info"></div>
+                <div class="header-actions">
+                    <button class="btn btn-icon" id="toggleSidebar">☰</button>
+                </div>
             </header>
-            <section class="content-area">
+
+            <!-- Custos Fixos Summary -->
+            <section class="card-grid">
+                <div class="card summary-card">
+                    <div class="card-content">
+                        <h3>Total de Custos Fixos Mensais</h3>
+                        <div class="card-value" id="totalCustosFixos">R$ 0,00</div>
+                    </div>
+                </div>
+                
+                <div class="card summary-card">
+                    <div class="card-content">
+                        <h3>Impacto por Unidade</h3>
+                        <div class="card-value" id="impactoUnidade">R$ 0,00</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Custos Fixos List -->
+            <section class="card-grid">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h2>Lista de Custos Fixos</h2>
+                        <button class="btn btn-primary" id="addCustoFixoBtn">Adicionar Custo Fixo</button>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>DESCRIÇÃO</th>
+                                        <th>CATEGORIA</th>
+                                        <th>VALOR MENSAL</th>
+                                        <th>AÇÕES</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="custosFixosList">
+                                    <!-- Dados serão inseridos via JavaScript -->
+                                </tbody>
+                            </table>
+                            <div id="emptyCustosFixos" class="empty-state">
+                                <p>Nenhum custo fixo cadastrado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Distribuição de Custos -->
+            <section class="card-grid two-columns">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Custos Fixos Mensais</h2>
-                        <button class="btn btn-primary" id="openAddCustoFixoModal">Adicionar Novo Custo Fixo</button>
+                        <h2>Distribuição por Categoria</h2>
                     </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Nome do Custo</th>
-                                <th>Valor Mensal (R$)</th>
-                                <th class="actions-column">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="custosFixosList">
-                            </tbody>
-                        <tfoot>
-                            <tr>
-                                <td data-label="Total Mensal:" colspan="1"><strong>Total Mensal:</strong></td>
-                                <td data-label="Total Mensal" id="totalCustosFixosMensais">R$ 0,00</td>
-                                <td></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div class="card-content">
+                        <div class="chart-container" id="categoriaChart">
+                            <!-- Chart will be rendered here by JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Evolução Mensal</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container" id="evolucaoChart">
+                            <!-- Chart will be rendered here by JS -->
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <div id="custoFixoModal" class="modal">
+    <!-- Modal de Cadastro de Custo Fixo -->
+    <div class="modal" id="custoFixoModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Adicionar Novo Custo Fixo</h2>
-                <button class="close-button">&times;</button>
+                <h2>Adicionar Custo Fixo</h2>
+                <button class="btn-close" id="closeModal">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="custoFixoForm">
-                    <input type="hidden" id="custoFixoId">
                     <div class="form-group">
-                        <label for="custoFixoNome">Nome do Custo:</label>
-                        <input type="text" id="custoFixoNome" required>
+                        <label for="descricaoCusto">Descrição:</label>
+                        <input type="text" id="descricaoCusto" name="descricaoCusto" class="form-control" required>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="categoriaCusto">Categoria:</label>
+                        <select id="categoriaCusto" name="categoriaCusto" class="form-control" required>
+                            <option value="">Selecione</option>
+                            <option value="Aluguel">Aluguel</option>
+                            <option value="Salários">Salários</option>
+                            <option value="Energia">Energia</option>
+                            <option value="Água">Água</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Manutenção">Manutenção</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="valorMensal">Valor Mensal (R$):</label>
-                        <input type="number" id="valorMensal" step="0.01" min="0" required>
+                        <input type="number" id="valorMensal" name="valorMensal" class="form-control" step="0.01" min="0" required>
                     </div>
+                    
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="button" class="btn btn-secondary close-button">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="js/storage.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/custosFixos.js"></script>
 </body>
 </html>
