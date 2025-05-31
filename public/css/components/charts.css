@@ -1,4 +1,304 @@
-canvas {
-    max-width: 100%;
-    height: auto;
+/* 
+* VEEX - Sistema de Gestão de Custos e Produção
+* Componente: Gráficos
+*/
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin-bottom: var(--spacing-md);
+}
+
+.chart-container.chart-sm {
+  height: 200px;
+}
+
+.chart-container.chart-lg {
+  height: 400px;
+}
+
+/* Estilos para legendas de gráficos */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  margin-right: var(--spacing-xs);
+}
+
+/* Tooltips personalizados para gráficos */
+.chart-tooltip {
+  background-color: var(--color-secondary-dark);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-sm);
+  box-shadow: var(--shadow-md);
+  font-size: var(--font-size-xs);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-tooltip-title {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-tooltip-value {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+/* Estilos para gráficos vazios */
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: var(--border-radius-md);
+}
+
+/* Cores para gráficos */
+:root {
+  --chart-color-1: var(--color-primary);
+  --chart-color-2: #4caf50;
+  --chart-color-3: #2196f3;
+  --chart-color-4: #ff9800;
+  --chart-color-5: #9c27b0;
+  --chart-color-6: #00bcd4;
+  --chart-color-7: #ffeb3b;
+  --chart-color-8: #795548;
+}
+
+/* Estilos para gráficos específicos */
+.donut-chart-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-chart-center {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.donut-chart-value {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.donut-chart-label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* Estilos para gráficos de barras */
+.bar-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de linha */
+.line-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de área */
+.area-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de pizza */
+.pie-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de dispersão */
+.scatter-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de radar */
+.radar-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de medidor */
+.gauge-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de funil */
+.funnel-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de calor */
+.heatmap-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de bolha */
+.bubble-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de árvore */
+.tree-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de sankey */
+.sankey-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de vela */
+.candlestick-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de boxplot */
+.boxplot-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de mapa */
+.map-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de calendário */
+.calendar-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de rede */
+.network-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de palavra */
+.wordcloud-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de sunburst */
+.sunburst-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de treemap */
+.treemap-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de paralela */
+.parallel-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de sankey */
+.sankey-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de vela */
+.candlestick-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de boxplot */
+.boxplot-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de mapa */
+.map-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de calendário */
+.calendar-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de rede */
+.network-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de palavra */
+.wordcloud-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de sunburst */
+.sunburst-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de treemap */
+.treemap-chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para gráficos de paralela */
+.parallel-chart-container {
+  width: 100%;
+  height: 100%;
 }
