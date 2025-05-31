@@ -1,256 +1,252 @@
-body {
-    margin: 0;
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-base);
-    line-height: 1.6;
-    color: var(--text-light);
-    display: flex;
-    justify-content: center; /* Centraliza o app-container */
-    align-items: flex-start;
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--gradient-start-color) 0%, var(--gradient-end-color) 100%); /* Degradê linear */
-    background-attachment: fixed;
-    overflow-y: auto;
+/* 
+* VEEX - Sistema de Gestão de Custos e Produção
+* Layout principal - Estrutura base do sistema
+*/
+
+/* Reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+/* Container principal */
 .app-container {
-    display: flex;
-    width: 100%;
-    max-width: 1500px; /* Largura máxima para desktop para evitar esticar demais */
-    min-height: 100vh;
-    background-color: transparent; /* Permite que o degradê do body seja visto */
-    box-shadow: none;
-    border-radius: var(--border-radius-xxl); /* Arredonda o container principal */
-    overflow: hidden; /* Garante que os cantos arredondados sejam cortados */
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--gradient-primary);
 }
 
+/* Sidebar */
 .sidebar {
-    width: 280px;
-    background-color: var(--surface-dark);
-    padding: var(--spacing-xl); /* Mais padding geral */
-    box-shadow: var(--shadow-medium);
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-    transition: transform var(--transition-speed) var(--transition-timing);
-    transform: translateX(0);
-    z-index: 1000;
-    border-right: 1px solid var(--border-color);
-    border-radius: var(--border-radius-xxl) 0 0 var(--border-radius-xxl); /* Arredondamento apenas na esquerda */
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background-color: var(--color-secondary-dark);
+  color: var(--text-primary);
+  padding: var(--spacing-md);
+  transition: width var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: var(--z-index-fixed);
+  box-shadow: var(--shadow-lg);
 }
 
-.sidebar.hidden {
-    transform: translateX(-100%);
-    position: absolute;
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
 }
 
-.sidebar-header {
-    text-align: center;
-    margin-bottom: var(--spacing-xxl);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.sidebar .logo {
+  padding: var(--spacing-md) 0;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
 }
 
-.sidebar-header .logo {
-    width: 90px; /* Um pouco maior para destaque */
-    height: 90px;
-    object-fit: contain;
-    margin-bottom: var(--spacing-sm);
-    filter: drop-shadow(0 0 8px var(--primary-color)); /* Brilho mais intenso */
+.sidebar .logo h1 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  letter-spacing: 1px;
 }
 
-.sidebar-header h3 {
-    margin: 0;
-    color: var(--text-light);
-    font-size: var(--font-size-xxl); /* Título maior e mais impactante */
-    font-weight: 800; /* Mais peso */
-    letter-spacing: 1.5px; /* Mais espaçamento para "Veex" */
-    text-transform: uppercase; /* Como na referência */
+.sidebar .menu {
+  flex: 1;
 }
 
-.main-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.sidebar .menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.main-nav li {
-    margin-bottom: var(--spacing-sm);
+.sidebar .menu li {
+  margin-bottom: var(--spacing-xs);
 }
 
-.main-nav a {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md) var(--spacing-lg);
-    color: var(--text-muted);
-    text-decoration: none;
-    border-radius: var(--border-radius-md);
-    transition: background-color var(--transition-speed) var(--transition-timing),
-                color var(--transition-speed) var(--transition-timing),
-                transform 0.1s ease-out;
-    font-weight: 500;
-    font-size: var(--font-size-base);
+.sidebar .menu a {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
 }
 
-.main-nav a .icon { /* Estilo para o span do ícone */
-    font-size: var(--font-size-large);
-    line-height: 1; /* Garante que o ícone não adicione espaçamento extra */
+.sidebar .menu a:hover {
+  background-color: var(--color-secondary-light);
+  color: var(--text-primary);
 }
 
-.main-nav a:hover {
-    background-color: var(--surface-light);
-    color: var(--primary-color);
-    transform: translateX(5px);
+.sidebar .menu li.active a {
+  background-color: var(--color-primary-dark);
+  color: var(--text-primary);
 }
 
-.main-nav a.active {
-    background-color: var(--primary-color);
-    color: var(--surface-dark);
-    box-shadow: var(--shadow-light);
-    font-weight: 600;
+.sidebar .menu .icon {
+  margin-right: var(--spacing-md);
+  font-size: var(--font-size-lg);
+  width: 24px;
+  text-align: center;
 }
 
+.sidebar.collapsed .menu .icon {
+  margin-right: 0;
+}
+
+.sidebar.collapsed .menu span:not(.icon) {
+  display: none;
+}
+
+.sidebar .user-profile {
+  padding: var(--spacing-md);
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-md);
+}
+
+.sidebar.collapsed .user-profile .user-info {
+  display: none;
+}
+
+/* Conteúdo principal */
 .main-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-    border-radius: 0 var(--border-radius-xxl) var(--border-radius-xxl) 0; /* Arredondamento apenas na direita */
+  flex: 1;
+  padding: var(--spacing-lg);
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  transition: margin-left var(--transition-normal), width var(--transition-normal);
+  min-height: 100vh;
 }
 
-.header {
-    background-color: var(--surface-dark);
-    padding: var(--spacing-lg) var(--spacing-xxl); /* Mais padding no header */
-    box-shadow: var(--shadow-light);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    border-bottom: 1px solid var(--border-color);
-    border-radius: 0 var(--border-radius-xxl) 0 0; /* Arredondamento superior direito */
+.sidebar.collapsed + .main-content {
+  margin-left: var(--sidebar-collapsed-width);
+  width: calc(100% - var(--sidebar-collapsed-width));
 }
 
-.header h1 {
-    margin: 0;
-    color: var(--text-light);
-    font-size: var(--font-size-xxl); /* Título principal maior */
-    font-weight: 800; /* Mais peso */
-    letter-spacing: 0.5px;
+/* Header da página */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.menu-toggle {
-    background: none;
-    border: none;
-    color: var(--text-light);
-    font-size: var(--font-size-xxxl); /* Ícone maior para mobile */
-    cursor: pointer;
-    display: none;
-    padding: var(--spacing-xs);
-    border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-speed) var(--transition-timing);
+.page-header h1 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
 }
 
-.menu-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
-.content-area {
-    padding: var(--spacing-xxl); /* Padding substancial para o conteúdo */
-    flex-grow: 1;
-    overflow-y: auto;
+/* Grid de cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
-/* Responsividade */
-@media (max-width: 992px) { /* Tablet breakpoint */
-    .app-container {
-        flex-direction: column;
-        max-width: 95%; /* Ocupa mais espaço em tablets */
-        border-radius: var(--border-radius-xl); /* Arredonda o container inteiro */
-        overflow: hidden;
-    }
-
-    .sidebar {
-        position: fixed;
-        width: 280px; /* Mantém a largura */
-        height: 100%;
-        transform: translateX(-100%);
-        box-shadow: var(--shadow-heavy);
-        border-radius: 0 var(--border-radius-xl) var(--border-radius-xl) 0;
-        border-right: none;
-        top: 0;
-        left: 0;
-    }
-
-    .sidebar.active {
-        transform: translateX(0);
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .main-content {
-        margin-left: 0;
-        border-radius: var(--border-radius-xl);
-    }
-
-    .header {
-        padding-left: var(--spacing-lg);
-        justify-content: flex-start;
-        gap: var(--spacing-md);
-        border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-    }
-
-    .header h1 {
-        font-size: var(--font-size-xl); /* Ajuste para tablets */
-    }
-
-    .content-area {
-        padding: var(--spacing-xl); /* Menos padding em tablets */
-    }
+.card-grid.two-columns {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-@media (max-width: 768px) { /* Mobile breakpoint */
-    .app-container {
-        max-width: 100%;
-        border-radius: 0;
-        min-height: 100vh;
-    }
+.card-grid.three-columns {
+  grid-template-columns: repeat(3, 1fr);
+}
 
-    .sidebar {
-        width: 85%; /* Um pouco mais largo em mobile */
-        max-width: 320px;
-    }
+.card-grid.four-columns {
+  grid-template-columns: repeat(4, 1fr);
+}
 
-    .header {
-        padding: var(--spacing-md) var(--spacing-lg);
-    }
+.card-grid .full-width {
+  grid-column: 1 / -1;
+}
 
-    .header h1 {
-        font-size: var(--font-size-large);
-        line-height: 1.2;
-    }
+/* Layouts específicos */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
 
-    .content-area {
-        padding: var(--spacing-lg); /* Padding para mobile */
-    }
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
 
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-    }
+.backup-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
 
-    .card {
-        padding: var(--spacing-lg);
-    }
+.backup-section {
+  padding: var(--spacing-lg);
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Formulários horizontais */
+.form-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.form-horizontal .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.ml-2 {
+  margin-left: var(--spacing-sm);
+}
+
+.mb-3 {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-lg);
 }
