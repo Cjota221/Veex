@@ -1,133 +1,177 @@
+/* 
+* VEEX - Sistema de Gestão de Custos e Produção
+* Componente: Cards
+*/
+
 .card {
-    background-color: var(--surface-dark);
-    border-radius: var(--border-radius-xl); /* Mais arredondado para um visual suave */
-    padding: var(--spacing-xl); /* Espaçamento interno generoso */
-    margin-bottom: var(--spacing-lg);
-    box-shadow: var(--shadow-medium); /* Sombra suave para elevação */
-    transition: transform var(--transition-speed) var(--transition-timing),
-                box-shadow var(--transition-speed) var(--transition-timing);
-    border: 1px solid var(--border-color); /* Borda muito sutil */
+  background: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Efeito de elevação mais pronunciado */
-    box-shadow: var(--shadow-heavy); /* Sombra mais intensa no hover */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card-header h2 {
-    margin-bottom: 0;
-    font-size: var(--font-size-xl); /* Títulos de cabeçalho de card */
-    font-weight: 700;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
 }
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsividade flexível */
-    gap: var(--spacing-xl); /* Espaçamento entre os cards do grid */
-    margin-bottom: var(--spacing-xxl);
+.card-content {
+  padding: var(--spacing-lg);
+  flex: 1;
 }
 
+.card-footer {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Variações de cards */
 .summary-card {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: var(--spacing-lg); /* Padding para cards menores de resumo */
-    min-height: 150px; /* Garante altura mínima para alinhamento */
-}
-
-.summary-card p {
-    font-size: var(--font-size-xxxl); /* Números grandes e impactantes */
-    font-weight: 800;
-    color: var(--secondary-color); /* Cor de destaque */
-    margin-top: var(--spacing-sm);
-    margin-bottom: 0;
-    line-height: 1; /* Para evitar espaçamento extra em números grandes */
+  text-align: center;
+  padding: var(--spacing-md);
 }
 
 .summary-card h3 {
-    font-size: var(--font-size-base); /* Descrição menor e discreta */
-    color: var(--text-muted);
-    font-weight: 500;
-    margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
 }
 
-.chart-card {
-    min-height: 380px; /* Altura mínima para o gráfico */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: var(--spacing-xl);
+.card-value {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
 }
 
-/* Estilos específicos para cards de modelos (na página de modelos ou resumo no dashboard) */
-.modelo-card {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--surface-dark);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-medium);
-    overflow: hidden;
+.report-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
 }
 
-.modelo-card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: var(--spacing-md);
-    background-color: var(--surface-light); /* Fundo sutil para o header do card */
-    border-bottom: 1px solid var(--border-color);
+.report-header {
+  padding: var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.modelo-thumb {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: var(--border-radius-md);
-    margin-bottom: var(--spacing-md);
-    border: 1px solid rgba(255,255,255,0.05);
+.report-header h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
 }
 
-.modelo-card-header h3 {
-    margin: 0;
-    color: var(--text-light);
-    font-size: var(--font-size-large);
-    text-align: center;
+.report-content {
+  padding: var(--spacing-md);
+  min-height: 200px;
 }
 
-.modelo-card-body {
-    padding: var(--spacing-lg);
-    flex-grow: 1;
+.report-footer {
+  padding: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
 }
 
-.modelo-card-body p {
-    margin-bottom: var(--spacing-sm);
-    font-size: var(--font-size-small);
-    color: var(--text-muted);
+/* Estados vazios */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  color: var(--text-muted);
+  text-align: center;
 }
 
-.modelo-card-body p strong {
-    color: var(--text-light);
-    font-weight: 600;
+.empty-state p {
+  margin-bottom: var(--spacing-md);
 }
 
-.modelo-card-actions {
-    margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-top: 1px solid var(--border-color);
-    background-color: var(--surface-light);
+/* Elementos de destaque */
+.highlight {
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.highlight-value {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Informações de resumo */
+.summary-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.summary-info p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Imagem do modelo */
+.model-image {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm);
+}
+
+.image-upload-container {
+  position: relative;
+  width: 100%;
+  min-height: 150px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.image-upload-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.image-upload-container input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
