@@ -4,152 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veex - Modelos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components/cards.css">
-    <link rel="stylesheet" href="css/components/forms.css">
     <link rel="stylesheet" href="css/components/buttons.css">
-    <link rel="stylesheet" href="css/components/modals.css">
     <link rel="stylesheet" href="css/components/tables.css">
-    <style>
-        /* Estilos específicos para a página de modelos */
-        /* Note: Muitos estilos de card-modelo foram movidos para components/cards.css */
-        .modelos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .insumo-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--surface-light);
-            padding: var(--spacing-sm);
-            margin-bottom: var(--spacing-xs);
-            border-radius: var(--border-radius-md);
-            border: 1px solid var(--border-color);
-            font-size: var(--font-size-small);
-        }
-
-        .insumo-item span {
-            flex-grow: 1;
-            color: var(--text-light);
-        }
-
-        .insumo-item .btn-sm {
-            padding: 4px 8px;
-            font-size: 0.75rem;
-        }
-    </style>
+    <link rel="stylesheet" href="css/components/forms.css">
+    <link rel="stylesheet" href="css/components/modals.css">
 </head>
-<body id="modelos-page">
+<body>
     <div class="app-container">
+        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="assets/img/logo.png" alt="Veex Logo" class="logo">
-                <h3>VEEX</h3>
+            <div class="logo">
+                <h1>VEEX</h1>
             </div>
-            <nav class="main-nav">
+            <nav class="menu">
                 <ul>
-                    <li><a href="index.html" class="nav-item"><span class="icon">🏠</span> Dashboard</a></li>
-                    <li><a href="insumos.html" class="nav-item"><span class="icon">📦</span> Insumos</a></li>
-                    <li><a href="modelos.html" class="nav-item active"><span class="icon">👟</span> Modelos</a></li>
-                    <li><a href="custos-fixos.html" class="nav-item"><span class="icon">⚙️</span> Custos Fixos</a></li>
-                    <li><a href="custos-variaveis.html" class="nav-item"><span class="icon">📊</span> Custos Variáveis</a></li>
-                    <li><a href="producao.html" class="nav-item"><span class="icon">🏭</span> Produção</a></li>
-                    <li><a href="estoque.html" class="nav-item"><span class="icon">📦</span> Estoque</a></li>
-                    <li><a href="financeiro.html" class="nav-item"><span class="icon">💰</span> Financeiro</a></li>
-                    <li><a href="relatorios.html" class="nav-item"><span class="icon">📄</span> Relatórios</a></li>
+                    <li><a href="index.html"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html"><span class="icon">📦</span> Insumos</a></li>
+                    <li class="active"><a href="modelos.html"><span class="icon">👟</span> Modelos</a></li>
+                    <li><a href="custos-fixos.html"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html"><span class="icon">💰</span> Financeiro</a></li>
+                    <li><a href="relatorios.html"><span class="icon">📄</span> Relatórios</a></li>
                 </ul>
             </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <span>👤</span>
+                </div>
+            </div>
         </aside>
+
+        <!-- Main Content -->
         <main class="main-content">
-            <header class="header">
-                <button class="menu-toggle" id="menuToggle">☰</button>
+            <header class="page-header">
                 <h1>Modelos</h1>
-                <div class="user-info"></div>
+                <div class="header-actions">
+                    <button class="btn btn-icon" id="toggleSidebar">☰</button>
+                </div>
             </header>
-            <section class="content-area">
+
+            <!-- Modelos List and Summary -->
+            <section class="card-grid two-columns">
                 <div class="card">
                     <div class="card-header">
                         <h2>Modelos Cadastrados</h2>
-                        <button class="btn btn-primary" id="openAddModeloModal">Cadastrar Novo Modelo</button>
+                        <button class="btn btn-primary" id="addModeloBtn">Cadastrar Novo Modelo</button>
                     </div>
-                    <div class="modelos-grid" id="modelosList">
+                    <div class="card-content">
+                        <div id="modelosList" class="models-grid">
+                            <!-- Modelos serão inseridos via JavaScript -->
                         </div>
+                        <div id="emptyModelos" class="empty-state">
+                            <p>Nenhum modelo cadastrado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Resumo de Custos e Preço</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="summary-info">
+                            <p><strong>Custo Unitário Total:</strong> <span id="custoUnitario" class="highlight">R$ 0,00</span></p>
+                            <p><strong>Margem de Lucro:</strong> <span id="margemLucro" class="highlight">0%</span></p>
+                            <p><strong>Preço de Venda Sugerido:</strong> <span id="precoVenda" class="highlight">R$ 0,00</span></p>
+                            <p><strong>Lucro Estimado por Par:</strong> <span id="lucroEstimado" class="highlight">R$ 0,00</span></p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <div id="modeloModal" class="modal">
-        <div class="modal-content">
+    <!-- Modal de Cadastro de Modelo -->
+    <div class="modal" id="modeloModal">
+        <div class="modal-content modal-lg">
             <div class="modal-header">
-                <h2 id="modalTitle">Cadastrar Novo Modelo</h2>
-                <button class="close-button">&times;</button>
+                <h2>Cadastrar Novo Modelo</h2>
+                <button class="btn-close" id="closeModal">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="modeloForm">
-                    <input type="hidden" id="modeloId">
-                    <input type="hidden" id="modeloImagemBase64">
-
-                    <div class="form-group">
-                        <label for="modeloNome">Nome do Modelo:</label>
-                        <input type="text" id="modeloNome" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="modeloImagem">Imagem do Modelo:</label>
-                        <input type="file" id="modeloImagem" accept="image/*" style="display: none;">
-                        <div class="image-upload-preview" id="imagePreview" onclick="document.getElementById('modeloImagem').click();">
-                            <span>Clique ou arraste para adicionar imagem</span>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nomeModelo">Nome do Modelo:</label>
+                            <input type="text" id="nomeModelo" name="nomeModelo" class="form-control" required>
                         </div>
                     </div>
-
-                    <h3>Composição de Insumos</h3>
-                    <div class="form-group">
-                        <label for="insumoSelect">Insumo:</label>
-                        <select id="insumoSelect">
-                            </select>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="imagemModelo">Imagem do Modelo:</label>
+                            <div class="image-upload-container">
+                                <input type="file" id="imagemModelo" name="imagemModelo" class="form-control-file" accept="image/*">
+                                <div class="image-upload-placeholder" id="imagePreview">
+                                    <span>Clique ou arraste para adicionar imagem</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="quantidadeInsumo">Quantidade Utilizada:</label>
-                        <input type="number" id="quantidadeInsumo" step="0.01" min="0">
+                    
+                    <div class="form-section">
+                        <h3>Composição de Insumos</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="insumoSelect">Insumo:</label>
+                                <select id="insumoSelect" name="insumoSelect" class="form-control">
+                                    <option value="">Selecione um Insumo</option>
+                                    <!-- Opções serão carregadas via JavaScript -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="quantidadeInsumo">Quantidade Utilizada:</label>
+                                <input type="number" id="quantidadeInsumo" name="quantidadeInsumo" class="form-control" step="0.01" min="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" id="addInsumoBtn">Adicionar Insumo</button>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="data-table" id="insumosTable">
+                                <thead>
+                                    <tr>
+                                        <th>Insumo</th>
+                                        <th>Quantidade</th>
+                                        <th>Custo</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Insumos serão adicionados via JavaScript -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Total:</strong></td>
+                                        <td id="totalCustoInsumos">R$ 0,00</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-secondary" id="addInsumoToModelo">Adicionar Insumo</button>
-                    <ul id="modeloInsumosComposicao" style="margin-top: var(--spacing-md); padding: 0; list-style: none;">
-                        </ul>
-
-                    <div class="form-group" style="margin-top: var(--spacing-lg);">
-                        <label for="margemLucro">Margem de Lucro Desejada (%):</label>
-                        <input type="number" id="margemLucro" step="0.1" min="0" max="100" required>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="margemLucroInput">Margem de Lucro Desejada (%):</label>
+                            <input type="number" id="margemLucroInput" name="margemLucroInput" class="form-control" min="0" max="100" value="30">
+                        </div>
                     </div>
-
-                    <div class="card summary-card" style="text-align: left; padding: var(--spacing-lg);">
-                        <h4>Resumo de Custos e Preço</h4>
-                        <p><strong>Custo Unitário Total:</strong> <span id="custoUnitarioTotal">R$ 0,00</span></p>
-                        <p><strong>Margem de Lucro:</strong> <span id="margemLucroDisplay">0%</span></p>
-                        <p><strong>Preço de Venda Sugerido:</strong> <span id="precoVendaSugerido">R$ 0,00</span></p>
-                        <p><strong>Lucro Estimado por Par:</strong> <span id="lucroEstimadoPorPar">R$ 0,00</span></p>
-                    </div>
-
+                    
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="button" class="btn btn-secondary close-button">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="js/storage.js"></script>
-    <script src="js/calculadora.js"></script>
     <script src="js/app.js"></script>
     <script src="js/modelos.js"></script>
 </body>
