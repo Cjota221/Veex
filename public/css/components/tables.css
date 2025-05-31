@@ -1,151 +1,148 @@
+/* 
+* VEEX - Sistema de Gestão de Custos e Produção
+* Componente: Tabelas
+*/
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .data-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 var(--spacing-sm); /* Espaçamento entre linhas da tabela */
-    margin-top: var(--spacing-lg);
-    overflow-x: auto; /* Permite rolagem horizontal em telas menores */
-    display: block; /* Essencial para overflow-x e para cada linha virar um bloco em mobile */
-    white-space: nowrap; /* Impede que o texto quebre linhas dentro das células */
-    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em dispositivos iOS */
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: var(--text-primary);
 }
 
-/* Torna o cabeçalho e corpo da tabela flexíveis dentro do container de rolagem */
-.data-table thead, .data-table tbody {
-    display: table;
-    width: 100%;
-    table-layout: fixed; /* Colunas de largura igual */
-}
-
-
-.data-table th,
-.data-table td {
-    padding: var(--spacing-md) var(--spacing-lg);
-    border: none;
-    text-align: left;
-    background-color: var(--surface-dark); /* Fundo padrão da célula */
-    color: var(--text-light);
-    vertical-align: middle;
-}
-
-.data-table th {
-    background-color: var(--surface-light); /* Fundo mais claro para o cabeçalho */
-    color: var(--text-light);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: var(--font-size-small);
-    position: sticky; /* Cabeçalho fixo ao rolar */
-    top: 0;
-    z-index: 1;
-    border-bottom: 1px solid var(--border-color); /* Separador sutil */
+.data-table thead th {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+  padding: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .data-table tbody tr {
-    background-color: var(--surface-dark);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-light); /* Sombra sutil para cada linha */
-    transition: transform var(--transition-speed) var(--transition-timing),
-                box-shadow var(--transition-speed) var(--transition-timing),
-                background-color var(--transition-speed) var(--transition-timing);
+  transition: background-color var(--transition-fast);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .data-table tbody tr:hover {
-    transform: translateY(-3px); /* Efeito de elevação no hover */
-    box-shadow: var(--shadow-medium);
-    background-color: var(--surface-light); /* Fundo ligeiramente mais claro no hover */
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
-/* Estilo para linhas pares para melhor legibilidade */
-.data-table tbody tr:nth-child(even) {
-    background-color: #262645; /* Um tom ligeiramente diferente */
-}
-.data-table tbody tr:nth-child(even):hover {
-     background-color: var(--surface-light); /* Mantém o hover uniforme */
+.data-table tbody td {
+  padding: var(--spacing-md);
+  vertical-align: middle;
+  color: var(--text-primary);
 }
 
-
-.data-table .actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    justify-content: center;
+.data-table tfoot tr {
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
-/* Arredondamento dos cantos das primeiras e últimas células */
-.data-table thead tr th:first-child {
-    border-top-left-radius: var(--border-radius-md);
-    border-bottom-left-radius: var(--border-radius-md);
-}
-.data-table thead tr th:last-child {
-    border-top-right-radius: var(--border-radius-md);
-    border-bottom-right-radius: var(--border-radius-md);
-}
-
-.data-table tbody tr td:first-child { border-top-left-radius: var(--border-radius-md); border-bottom-left-radius: var(--border-radius-md); }
-.data-table tbody tr td:last-child { border-top-right-radius: var(--border-radius-md); border-bottom-right-radius: var(--border-radius-md); }
-
-/* Estilo para o rodapé da tabela */
 .data-table tfoot td {
-    padding-top: var(--spacing-md);
-    padding-bottom: var(--spacing-md);
-    font-weight: 700;
-    color: var(--primary-color);
-    border-top: 1px solid var(--border-color);
-    background-color: var(--surface-dark);
-    border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
 }
 
-/* Responsividade para tabelas em Mobile (menor que 768px) */
-@media (max-width: 768px) {
-    .data-table {
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%; /* Ocupa a largura total */
-        border-spacing: 0; /* Remove espaçamento entre linhas em mobile */
-    }
+/* Ações nas tabelas */
+.table-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+}
 
-    .data-table thead {
-        display: none; /* Esconde o cabeçalho da tabela em mobile */
-    }
+/* Status nas tabelas */
+.status-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+}
 
-    .data-table tbody, .data-table tr, .data-table td {
-        display: block; /* Cada linha e célula se torna um bloco */
-        width: 100%; /* Ocupa a largura total */
-        white-space: normal; /* Permite quebra de linha normal */
-    }
+.status-success {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: var(--color-success);
+}
 
-    .data-table tbody tr {
-        margin-bottom: var(--spacing-md);
-        border: 1px solid var(--border-color);
-        box-shadow: var(--shadow-light);
-        border-radius: var(--border-radius-lg); /* Bordas mais arredondadas para as "linhas-cards" */
-        overflow: hidden; /* Garante que o conteúdo não vaze */
-    }
+.status-warning {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: var(--color-warning);
+}
 
-    .data-table tbody td {
-        text-align: right; /* Alinha o valor à direita */
-        padding-left: 50%; /* Cria espaço para a label */
-        position: relative;
-        border-bottom: 1px dotted var(--border-color); /* Separador sutil entre células */
-        background-color: var(--surface-dark); /* Garante fundo da célula */
-    }
+.status-danger {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: var(--color-danger);
+}
 
-    .data-table tbody td:last-child {
-        border-bottom: none; /* Remove borda da última célula */
-    }
+.status-info {
+  background-color: rgba(33, 150, 243, 0.2);
+  color: var(--color-info);
+}
 
-    .data-table tbody td::before { /* Pseudo-elemento para exibir o cabeçalho (data-label) */
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: var(--spacing-md);
-        font-weight: 600;
-        color: var(--text-muted);
-        text-align: left;
-    }
+/* Tabelas compactas */
+.data-table.table-sm th,
+.data-table.table-sm td {
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+}
 
-    .data-table .actions {
-        justify-content: flex-end;
-        padding-top: var(--spacing-md);
-        border-top: 1px solid var(--border-color); /* Linha divisória antes das ações */
-    }
+/* Tabelas com bordas */
+.data-table.table-bordered th,
+.data-table.table-bordered td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tabelas com linhas alternadas */
+.data-table.table-striped tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Alinhamento de células */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Células com valores numéricos */
+.cell-number {
+  text-align: right;
+  font-family: monospace;
+  font-size: var(--font-size-sm);
+}
+
+/* Células com ações */
+.cell-actions {
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* Células com imagens */
+.cell-image {
+  width: 40px;
+  height: 40px;
+}
+
+.cell-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
 }
