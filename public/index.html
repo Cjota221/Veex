@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veex - Dashboard</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/tables.css">
+    <link rel="stylesheet" href="css/components/charts.css">
+    <link rel="stylesheet" href="css/components/forms.css">
+    <link rel="stylesheet" href="css/components/modals.css">
 </head>
 <body>
     <div class="app-container">
@@ -16,175 +22,214 @@
                 <h1>VEEX</h1>
             </div>
             <nav class="menu">
-                <a href="index.html" class="menu-item active">
-                    <span class="icon">🏠</span>
-                    <span class="text">Dashboard</span>
-                </a>
-                <a href="insumos.html" class="menu-item">
-                    <span class="icon">📦</span>
-                    <span class="text">Insumos</span>
-                </a>
-                <a href="modelos.html" class="menu-item">
-                    <span class="icon">👟</span>
-                    <span class="text">Modelos</span>
-                </a>
-                <a href="custos-fixos.html" class="menu-item">
-                    <span class="icon">⚙️</span>
-                    <span class="text">Custos Fixos</span>
-                </a>
-                <a href="custos-variaveis.html" class="menu-item">
-                    <span class="icon">📊</span>
-                    <span class="text">Custos Variáveis</span>
-                </a>
-                <a href="producao.html" class="menu-item">
-                    <span class="icon">🏭</span>
-                    <span class="text">Produção</span>
-                </a>
-                <a href="estoque.html" class="menu-item">
-                    <span class="icon">📦</span>
-                    <span class="text">Estoque</span>
-                </a>
-                <a href="financeiro.html" class="menu-item">
-                    <span class="icon">💰</span>
-                    <span class="text">Financeiro</span>
-                </a>
-                <a href="relatorios.html" class="menu-item">
-                    <span class="icon">📄</span>
-                    <span class="text">Relatórios</span>
-                </a>
+                <ul>
+                    <li class="active"><a href="index.html"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="insumos.html"><span class="icon">📦</span> Insumos</a></li>
+                    <li><a href="modelos.html"><span class="icon">👟</span> Modelos</a></li>
+                    <li><a href="custos-fixos.html"><span class="icon">⚙️</span> Custos Fixos</a></li>
+                    <li><a href="custos-variaveis.html"><span class="icon">📊</span> Custos Variáveis</a></li>
+                    <li><a href="producao.html"><span class="icon">🏭</span> Produção</a></li>
+                    <li><a href="estoque.html"><span class="icon">📦</span> Estoque</a></li>
+                    <li><a href="financeiro.html"><span class="icon">💰</span> Financeiro</a></li>
+                    <li><a href="relatorios.html"><span class="icon">📄</span> Relatórios</a></li>
+                </ul>
             </nav>
             <div class="user-profile">
                 <div class="avatar">
-                    <i class="fas fa-user"></i>
+                    <span>👤</span>
                 </div>
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <header class="header">
-                <button class="menu-toggle" id="menuToggle">☰</button>
+            <header class="page-header">
                 <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn btn-icon" id="toggleSidebar">☰</button>
+                </div>
             </header>
 
-            <!-- Dashboard Cards -->
-            <div class="dashboard-cards">
-                <div class="card">
+            <!-- Dashboard Summary Cards -->
+            <section class="card-grid">
+                <div class="card summary-card">
                     <div class="card-content">
                         <h3>Total de Modelos Cadastrados</h3>
                         <div class="card-value">0</div>
                     </div>
                 </div>
-                <div class="card">
+                
+                <div class="card summary-card">
                     <div class="card-content">
                         <h3>Custo Médio por Unidade</h3>
                         <div class="card-value">R$ 0,00</div>
                     </div>
                 </div>
-                <div class="card">
+                
+                <div class="card summary-card">
                     <div class="card-content">
                         <h3>Produção do Mês</h3>
                         <div class="card-value">0 Pares</div>
                     </div>
                 </div>
-                <div class="card">
+                
+                <div class="card summary-card">
                     <div class="card-content">
                         <h3>Lucro Estimado</h3>
                         <div class="card-value">R$ 0,00</div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Charts and Tables -->
-            <div class="dashboard-charts">
-                <div class="chart-container">
-                    <h2>Produção Recente</h2>
-                    <canvas id="producaoChart"></canvas>
-                </div>
-            </div>
-
-            <div class="dashboard-tables">
-                <div class="table-container">
-                    <h2>Resumo de Custo por Modelo</h2>
-                    <div class="model-cards">
-                        <div class="model-card">
-                            <h3>Tênis de Corrida</h3>
-                            <p><strong>Custo Unitário:</strong> R$ 80,00</p>
-                            <p><strong>Preço Sugerido:</strong> R$ 120,00</p>
-                            <button class="btn-secondary" onclick="verDetalhesModelo(1)">Ver Detalhes</button>
-                        </div>
-                        <div class="model-card">
-                            <h3>Oxford Casual</h3>
-                            <p><strong>Custo Unitário:</strong> R$ 63,00</p>
-                            <p><strong>Preço Sugerido:</strong> R$ 120,00</p>
-                            <button class="btn-secondary" onclick="verDetalhesModelo(2)">Ver Detalhes</button>
-                        </div>
-                        <div class="model-card">
-                            <h3>Sandália</h3>
-                            <p><strong>Custo Unitário:</strong> R$ 80,00</p>
-                            <p><strong>Preço Sugerido:</strong> R$ 120,00</p>
-                            <button class="btn-secondary" onclick="verDetalhesModelo(3)">Ver Detalhes</button>
+            <!-- Production Chart -->
+            <section class="card-grid">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Produção Recente</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container" id="productionChart">
+                            <!-- Chart will be rendered here by JS -->
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="table-container">
-                    <h2>Resumo de Produção</h2>
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Modelo</th>
-                                    <th>Quantidade</th>
-                                    <th>Custo Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Tênis de Corrida</td>
-                                    <td>100</td>
-                                    <td>R$ 3.500,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Oxford Casual</td>
-                                    <td>50</td>
-                                    <td>R$ 1.800,00</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- Model Cost Summary -->
+            <section class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Resumo de Custo por Modelo</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="model-cards">
+                            <div class="model-card">
+                                <div class="model-info">
+                                    <h3>Tênis de Corrida</h3>
+                                    <p><strong>Custo Unitário:</strong> <span class="highlight">R$ 80,00</span></p>
+                                    <p><strong>Preço Sugerido:</strong> <span class="highlight">R$ 120,00</span></p>
+                                    <a href="#" class="btn btn-text">Ver Detalhes</a>
+                                </div>
+                            </div>
+                            
+                            <div class="model-card">
+                                <div class="model-info">
+                                    <h3>Oxford Casual</h3>
+                                    <p><strong>Custo Unitário:</strong> <span class="highlight">R$ 63,00</span></p>
+                                    <p><strong>Preço Sugerido:</strong> <span class="highlight">R$ 120,00</span></p>
+                                    <a href="#" class="btn btn-text">Ver Detalhes</a>
+                                </div>
+                            </div>
+                            
+                            <div class="model-card">
+                                <div class="model-info">
+                                    <h3>Sandália</h3>
+                                    <p><strong>Custo Unitário:</strong> <span class="highlight">R$ 80,00</span></p>
+                                    <p><strong>Preço Sugerido:</strong> <span class="highlight">R$ 120,00</span></p>
+                                    <a href="#" class="btn btn-text">Ver Detalhes</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="table-container">
-                    <h2>Resumo de Consumo de Insumos</h2>
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nome do Insumo</th>
-                                    <th>Quantidade Consumida</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Couro</td>
-                                    <td>120 m</td>
-                                </tr>
-                                <tr>
-                                    <td>Borracha</td>
-                                    <td>80 m</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- Production and Materials Summary -->
+            <section class="card-grid two-columns">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Resumo de Produção</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Modelo</th>
+                                        <th>Quantidade</th>
+                                        <th>Custo Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tênis de Corrida</td>
+                                        <td>100</td>
+                                        <td>R$ 3.500,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Oxford Casual</td>
+                                        <td>50</td>
+                                        <td>R$ 1.800,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Resumo de Consumo de Insumos</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome do Insumo</th>
+                                        <th>Quantidade Consumida</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Couro</td>
+                                        <td>120 m</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Borracha</td>
+                                        <td>80 m</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/storage.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Simples gráfico de exemplo
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.createElement('canvas');
+            document.getElementById('productionChart').appendChild(ctx);
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                    datasets: [{
+                        label: 'Pares Produzidos',
+                        data: [65, 59, 80, 81, 56, 55],
+                        backgroundColor: 'rgba(220, 46, 218, 0.2)',
+                        borderColor: 'rgba(220, 46, 218, 1)',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
