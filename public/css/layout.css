@@ -1,76 +1,126 @@
 /* 
 * VEEX - Sistema de Gestão de Custos e Produção
-* Arquivo: layout.css
-* Descrição: Estilos para layout principal, sidebar e estrutura da página
+* Layout principal - Estrutura base do sistema
 */
+
+/* Reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+/* Container principal */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--gradient-primary);
+}
 
 /* Sidebar */
 .sidebar {
   width: var(--sidebar-width);
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--color-secondary-dark);
+  color: var(--text-primary);
+  padding: var(--spacing-md);
+  transition: width var(--transition-normal);
+  display: flex;
+  flex-direction: column;
   position: fixed;
   left: 0;
   top: 0;
-  overflow-y: auto;
-  transition: transform var(--transition-normal);
-  z-index: 100;
-  box-shadow: var(--shadow-md);
+  bottom: 0;
+  z-index: var(--z-index-fixed);
+  box-shadow: var(--shadow-lg);
 }
 
-.logo {
-  padding: var(--spacing-md);
-  text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
 }
 
-.logo h1 {
-  color: var(--color-primary);
-  font-size: var(--font-size-xxl);
-  margin: 0;
-  letter-spacing: 2px;
-}
-
-.menu {
+.sidebar .logo {
   padding: var(--spacing-md) 0;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
 }
 
-.menu-item {
+.sidebar .logo h1 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
+
+.sidebar .menu {
+  flex: 1;
+}
+
+.sidebar .menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar .menu li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.sidebar .menu a {
   display: flex;
   align-items: center;
-  padding: var(--spacing-md) var(--spacing-lg);
-  color: var(--color-text-secondary);
+  padding: var(--spacing-md);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
   transition: all var(--transition-fast);
-  border-left: 3px solid transparent;
 }
 
-.menu-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--color-text-primary);
+.sidebar .menu a:hover {
+  background-color: var(--color-secondary-light);
+  color: var(--text-primary);
 }
 
-.menu-item.active {
-  background-color: rgba(233, 30, 99, 0.15);
-  color: var(--color-primary);
-  border-left: 3px solid var(--color-primary);
+.sidebar .menu li.active a {
+  background-color: var(--color-primary-dark);
+  color: var(--text-primary);
 }
 
-.menu-item .icon {
+.sidebar .menu .icon {
   margin-right: var(--spacing-md);
   font-size: var(--font-size-lg);
+  width: 24px;
+  text-align: center;
 }
 
-.user-profile {
+.sidebar.collapsed .menu .icon {
+  margin-right: 0;
+}
+
+.sidebar.collapsed .menu span:not(.icon) {
+  display: none;
+}
+
+.sidebar .user-profile {
   padding: var(--spacing-md);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
   display: flex;
   align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.avatar {
+.sidebar .avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -78,132 +128,125 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  margin-right: var(--spacing-md);
 }
 
-/* Main Content */
+.sidebar.collapsed .user-profile .user-info {
+  display: none;
+}
+
+/* Conteúdo principal */
 .main-content {
-  margin-left: var(--sidebar-width);
+  flex: 1;
   padding: var(--spacing-lg);
+  margin-left: var(--sidebar-width);
   width: calc(100% - var(--sidebar-width));
+  transition: margin-left var(--transition-normal), width var(--transition-normal);
   min-height: 100vh;
 }
 
-.header {
+.sidebar.collapsed + .main-content {
+  margin-left: var(--sidebar-collapsed-width);
+  width: calc(100% - var(--sidebar-collapsed-width));
+}
+
+/* Header da página */
+.page-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-xl);
   padding-bottom: var(--spacing-md);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--color-text-primary);
-  font-size: var(--font-size-xl);
-  cursor: pointer;
-  margin-right: var(--spacing-md);
+.page-header h1 {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
 }
 
-/* Dashboard Layout */
-.dashboard-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
-}
-
-.dashboard-charts {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
-}
-
-.dashboard-tables {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-lg);
-}
-
-.chart-container {
-  background-color: var(--color-bg-card);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
-}
-
-.table-container {
-  background-color: var(--color-bg-card);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
-  margin-bottom: var(--spacing-lg);
-}
-
-/* Model Cards */
-.model-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.header-actions {
+  display: flex;
+  align-items: center;
   gap: var(--spacing-md);
 }
 
-.model-card {
-  background-color: var(--color-secondary);
-  border-radius: var(--border-radius-md);
-  padding: var(--spacing-md);
-  box-shadow: var(--shadow-sm);
+/* Grid de cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
-/* Responsividade */
-@media (max-width: 1200px) {
-  .dashboard-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .model-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.card-grid.two-columns {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-@media (max-width: 992px) {
-  .dashboard-tables {
-    grid-template-columns: 1fr;
-  }
+.card-grid.three-columns {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%);
-    z-index: 1000;
-  }
-  
-  .sidebar.active {
-    transform: translateX(0);
-  }
-  
-  .main-content {
-    margin-left: 0;
-    width: 100%;
-  }
-  
-  .menu-toggle {
-    display: block;
-  }
-  
-  .dashboard-cards {
-    grid-template-columns: 1fr;
-  }
-  
-  .model-cards {
-    grid-template-columns: 1fr;
-  }
+.card-grid.four-columns {
+  grid-template-columns: repeat(4, 1fr);
 }
 
-@media (max-width: 576px) {
-  .main-content {
-    padding: var(--spacing-md);
-  }
+.card-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+/* Layouts específicos */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.backup-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.backup-section {
+  padding: var(--spacing-lg);
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Formulários horizontais */
+.form-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.form-horizontal .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.ml-2 {
+  margin-left: var(--spacing-sm);
+}
+
+.mb-3 {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-lg);
 }
