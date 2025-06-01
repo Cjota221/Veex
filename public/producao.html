@@ -4,14 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veex - Produção</title>
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/components/cards.css">
-    <link rel="stylesheet" href="css/components/buttons.css">
-    <link rel="stylesheet" href="css/components/tables.css">
-    <link rel="stylesheet" href="css/components/forms.css">
-    <link rel="stylesheet" href="css/components/modals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="app-container">
@@ -21,174 +15,142 @@
                 <h1>VEEX</h1>
             </div>
             <nav class="menu">
-                <ul>
-                    <li><a href="index.html"><span class="icon">🏠</span> Dashboard</a></li>
-                    <li><a href="insumos.html"><span class="icon">📦</span> Insumos</a></li>
-                    <li><a href="modelos.html"><span class="icon">👟</span> Modelos</a></li>
-                    <li><a href="custos-fixos.html"><span class="icon">⚙️</span> Custos Fixos</a></li>
-                    <li><a href="custos-variaveis.html"><span class="icon">📊</span> Custos Variáveis</a></li>
-                    <li class="active"><a href="producao.html"><span class="icon">🏭</span> Produção</a></li>
-                    <li><a href="estoque.html"><span class="icon">📦</span> Estoque</a></li>
-                    <li><a href="financeiro.html"><span class="icon">💰</span> Financeiro</a></li>
-                    <li><a href="relatorios.html"><span class="icon">📄</span> Relatórios</a></li>
-                </ul>
+                <a href="index.html" class="menu-item">
+                    <span class="icon">🏠</span>
+                    <span class="text">Dashboard</span>
+                </a>
+                <a href="insumos.html" class="menu-item">
+                    <span class="icon">📦</span>
+                    <span class="text">Insumos</span>
+                </a>
+                <a href="modelos.html" class="menu-item">
+                    <span class="icon">👟</span>
+                    <span class="text">Modelos</span>
+                </a>
+                <a href="custos-fixos.html" class="menu-item">
+                    <span class="icon">⚙️</span>
+                    <span class="text">Custos Fixos</span>
+                </a>
+                <a href="custos-variaveis.html" class="menu-item">
+                    <span class="icon">📊</span>
+                    <span class="text">Custos Variáveis</span>
+                </a>
+                <a href="producao.html" class="menu-item active">
+                    <span class="icon">🏭</span>
+                    <span class="text">Produção</span>
+                </a>
+                <a href="estoque.html" class="menu-item">
+                    <span class="icon">📦</span>
+                    <span class="text">Estoque</span>
+                </a>
+                <a href="financeiro.html" class="menu-item">
+                    <span class="icon">💰</span>
+                    <span class="text">Financeiro</span>
+                </a>
+                <a href="relatorios.html" class="menu-item">
+                    <span class="icon">📄</span>
+                    <span class="text">Relatórios</span>
+                </a>
             </nav>
             <div class="user-profile">
                 <div class="avatar">
-                    <span>👤</span>
+                    <i class="fas fa-user"></i>
                 </div>
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <header class="page-header">
+            <header class="header">
+                <button class="menu-toggle" id="menuToggle">☰</button>
                 <h1>Produção</h1>
-                <div class="header-actions">
-                    <button class="btn btn-icon" id="toggleSidebar">☰</button>
-                </div>
             </header>
 
-            <!-- Produção Summary -->
-            <section class="card-grid">
-                <div class="card summary-card">
-                    <div class="card-content">
-                        <h3>Total Produzido (Mês)</h3>
-                        <div class="card-value" id="totalProduzido">0 pares</div>
+            <!-- Registro de Produções -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2>Registro de Produções</h2>
+                    <button class="btn-primary" id="btnNovaProducao" data-modal="producaoModal">Registrar Nova Produção</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="tabelaProducoes">
+                            <thead>
+                                <tr>
+                                    <th>DATA</th>
+                                    <th>NOME DA PRODUÇÃO</th>
+                                    <th>TOTAL DE PARES</th>
+                                    <th>CUSTO TOTAL</th>
+                                    <th>LUCRO TOTAL ESTIMADO</th>
+                                    <th>AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dados serão carregados via JavaScript -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                
-                <div class="card summary-card">
-                    <div class="card-content">
-                        <h3>Custo Total de Produção</h3>
-                        <div class="card-value" id="custoTotalProducao">R$ 0,00</div>
-                    </div>
+                <div class="card-footer">
+                    <p>Total de Produções: <span id="totalProducoes">0</span></p>
                 </div>
-                
-                <div class="card summary-card">
-                    <div class="card-content">
-                        <h3>Média Diária</h3>
-                        <div class="card-value" id="mediaDiaria">0 pares</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Registro de Produção -->
-            <section class="card-grid">
-                <div class="card full-width">
-                    <div class="card-header">
-                        <h2>Registrar Produção</h2>
-                    </div>
-                    <div class="card-content">
-                        <form id="producaoForm" class="form-horizontal">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="modeloSelect">Modelo:</label>
-                                    <select id="modeloSelect" name="modeloSelect" class="form-control" required>
-                                        <option value="">Selecione um Modelo</option>
-                                        <!-- Opções serão carregadas via JavaScript -->
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="quantidadeProduzida">Quantidade Produzida:</label>
-                                    <input type="number" id="quantidadeProduzida" name="quantidadeProduzida" class="form-control" min="1" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="dataProducao">Data:</label>
-                                    <input type="date" id="dataProducao" name="dataProducao" class="form-control" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Registrar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Histórico de Produção -->
-            <section class="card-grid">
-                <div class="card full-width">
-                    <div class="card-header">
-                        <h2>Histórico de Produção</h2>
-                        <div class="header-actions">
-                            <div class="form-inline">
-                                <select id="filtroMes" class="form-control form-control-sm">
-                                    <option value="0">Janeiro</option>
-                                    <option value="1">Fevereiro</option>
-                                    <option value="2">Março</option>
-                                    <option value="3">Abril</option>
-                                    <option value="4">Maio</option>
-                                    <option value="5">Junho</option>
-                                    <option value="6">Julho</option>
-                                    <option value="7">Agosto</option>
-                                    <option value="8">Setembro</option>
-                                    <option value="9">Outubro</option>
-                                    <option value="10">Novembro</option>
-                                    <option value="11">Dezembro</option>
-                                </select>
-                                <select id="filtroAno" class="form-control form-control-sm ml-2">
-                                    <!-- Anos serão preenchidos via JavaScript -->
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="table-responsive">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>DATA</th>
-                                        <th>MODELO</th>
-                                        <th>QUANTIDADE</th>
-                                        <th>CUSTO TOTAL</th>
-                                        <th>AÇÕES</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="historicoProducao">
-                                    <!-- Dados serão inseridos via JavaScript -->
-                                </tbody>
-                            </table>
-                            <div id="emptyProducao" class="empty-state">
-                                <p>Nenhum registro de produção encontrado.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Análise de Produção -->
-            <section class="card-grid two-columns">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Produção por Modelo</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="chart-container" id="producaoPorModeloChart">
-                            <!-- Chart will be rendered here by JS -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Evolução da Produção</h2>
-                    </div>
-                    <div class="card-content">
-                        <div class="chart-container" id="evolucaoProducaoChart">
-                            <!-- Chart will be rendered here by JS -->
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </main>
     </div>
 
+    <!-- Modal de Produção -->
+    <div id="producaoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Registrar Nova Produção</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="formProducao">
+                    <div class="form-group">
+                        <label for="nomeProducao">Nome da Produção</label>
+                        <input type="text" id="nomeProducao" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modeloProducao">Modelo</label>
+                        <select id="modeloProducao" class="form-control" required>
+                            <option value="">Selecione um modelo</option>
+                            <!-- Opções serão carregadas via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidadeProducao">Quantidade (pares)</label>
+                        <input type="number" id="quantidadeProducao" class="form-control" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataProducao">Data</label>
+                        <input type="date" id="dataProducao" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3>Resumo</h3>
+                        <div class="summary-item">
+                            <span>Custo Total:</span>
+                            <span id="custoTotalProducao">R$ 0,00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Lucro Estimado:</span>
+                            <span id="lucroEstimadoProducao">R$ 0,00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
     <script src="js/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/producao.js"></script>
 </body>
 </html>
