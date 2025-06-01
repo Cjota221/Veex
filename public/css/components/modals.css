@@ -1,197 +1,102 @@
 /* 
 * VEEX - Sistema de Gestão de Custos e Produção
-* Componente: Modais
+* Arquivo: components/modals.css
+* Descrição: Estilos para modais e diálogos
 */
 
 .modal {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  overflow: auto;
+  animation: fadeIn var(--transition-normal);
+}
+
+.modal.active {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: var(--z-index-modal);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition-normal), visibility var(--transition-normal);
-}
-
-.modal.show {
-  opacity: 1;
-  visibility: visible;
 }
 
 .modal-content {
-  background-color: var(--bg-card);
+  background-color: var(--color-bg-modal);
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
   width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  transform: translateY(-20px);
-  transition: transform var(--transition-normal);
-  overflow: hidden;
-}
-
-.modal.show .modal-content {
-  transform: translateY(0);
-}
-
-.modal-content.modal-lg {
-  max-width: 800px;
-}
-
-.modal-content.modal-sm {
-  max-width: 400px;
+  max-width: 600px;
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: slideIn var(--transition-normal);
 }
 
 .modal-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-lg);
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-header h2 {
   margin: 0;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
 }
 
 .modal-body {
-  padding: var(--spacing-lg);
-  overflow-y: auto;
-  flex: 1;
+  margin-bottom: var(--spacing-lg);
 }
 
 .modal-footer {
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Animações de modal */
-@keyframes fadeIn {
+.close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.close:hover {
+  color: var(--color-primary);
+}
+
+/* Animações para modais */
+@keyframes slideIn {
   from {
+    transform: translateY(-50px);
     opacity: 0;
   }
   to {
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateY(-30px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-.modal.animate-fade {
-  animation: fadeIn var(--transition-normal);
-}
-
-.modal.animate-fade .modal-content {
-  animation: slideIn var(--transition-normal);
-}
-
-/* Overlay de confirmação */
-.confirmation-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--bg-card);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xl);
-  text-align: center;
-  z-index: 1;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition-normal), visibility var(--transition-normal);
-}
-
-.confirmation-overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.confirmation-overlay p {
-  margin-bottom: var(--spacing-lg);
-  font-size: var(--font-size-lg);
-  color: var(--text-primary);
-}
-
-.confirmation-actions {
-  display: flex;
-  gap: var(--spacing-md);
-}
-
-/* Tooltips em modais */
-.modal-tooltip {
-  position: relative;
-  display: inline-block;
-  margin-left: var(--spacing-xs);
-  color: var(--text-muted);
-  cursor: help;
-}
-
-.modal-tooltip:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--color-secondary-dark);
-  color: var(--text-primary);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-xs);
-  white-space: nowrap;
-  z-index: var(--z-index-tooltip);
-}
-
-/* Responsividade para modais */
+/* Responsividade */
 @media (max-width: 576px) {
   .modal-content {
     width: 95%;
-    max-width: none;
-  }
-  
-  .modal-content.modal-lg {
-    width: 95%;
-    max-width: none;
-  }
-  
-  .modal-header {
-    padding: var(--spacing-md);
-  }
-  
-  .modal-body {
     padding: var(--spacing-md);
   }
   
   .modal-footer {
-    padding: var(--spacing-md);
     flex-direction: column;
   }
   
-  .modal-footer .btn {
+  .modal-footer button {
     width: 100%;
   }
 }
